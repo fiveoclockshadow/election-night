@@ -4,8 +4,8 @@
 require 'yaml'
 require 'active_record'
 
-if ENV["DATABASE_URL"]
-  ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"])
+if ENV['DATABASE_URL']
+  ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
 else
   db_config = YAML.load(
     File.read(

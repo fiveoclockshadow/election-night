@@ -6,6 +6,9 @@ require 'sinatra'
 require 'json'
 
 require_relative 'database'
+require_relative 'candidate'
+require_relative 'enrollment'
+require_relative 'campaign'
 
 class App < Sinatra::Base
   # Serve any HTML/CSS/JS from the client folder
@@ -21,16 +24,14 @@ class App < Sinatra::Base
   end
 
   helpers do
-  def respond_with_or_errors(code, obj)
-    if obj.valid?
-      [code, obj.to_json]
-    else
-      [422, { errors: obj.errors.to_h }.to_json]
+    def respond_with_or_errors(code, obj)
+      if obj.valid?
+        [code, obj.to_json]
+      else
+        [422, { errors: obj.errors.to_h }.to_json]
+      end
     end
   end
-  end
-
-
 
   # DO NOT REMOVE THIS ENDPOINT IT ENABLES HOSTING HTML FOR THE FRONT END
   get '/' do
@@ -38,9 +39,24 @@ class App < Sinatra::Base
     body File.read(File.join(settings.public_folder, 'index.html'))
   end
 
-  # You can delete this route but you should nest your endpoints under /api
+  ########## CANDIDATES
   get '/api/candidates' do
     Candidate.all.to_json
+  end
+
+  get '/api/candidates/:id' do
+    Candidate.find(params['id']).to_json
+  end
+
+  post '/api/candidates/:id' do
+    cadidates = Candidate.new(params['id']).to_json
+    respond_with_or_errors(201, cadidates)
+  end
+
+  ########## CAMPAIGNS
+  post '/api/campaigns/:id' do
+    campaign = Campaign.create(params['id']).to_json
+    respond_with_or_errors(201, campaign)
   end
 
   get '/api/campaigns' do
@@ -50,21 +66,6 @@ class App < Sinatra::Base
   get '/api/campaigns/:id' do
     Campaign.find(params['id']).to_json
   end
-
-  get '/api/candidates/:id' do
-    Candidate.find(params['id']).to_json
-  end
-
-  post '/api/campaigns/:id' do
-    campaign = Campaign.create(params['id']).to_json
-    respond_with_or_errors(201, campaign)
-  end
-
-  post '/api/candidates/:id' do
-    cadidates = Candidate.new(params['id']).to_json
-    respond_with_or_errors(201, cadidates)
-  end
-
 
   # If this file is run directly boot the webserver
   run! if app_file == $PROGRAM_NAME
