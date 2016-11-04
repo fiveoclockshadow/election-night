@@ -47,7 +47,7 @@ class AppTest < Minitest::Test
 
   def test_root_route
     get '/'
-    assert_equal(File.read(File.expand_path("../client/public/index.html")), last_response.body)
+    assert_equal(File.read(File.expand_path('../client/public/index.html')), last_response.body)
   end
 
   def test_can_index_candidates
@@ -63,7 +63,7 @@ class AppTest < Minitest::Test
     get '/api/campaigns'
     assert_equal 200, last_response.status
     assert_equal Array, parsed_response.class
-    assert parsed_response.first["winning_candidate_id"]
+    assert parsed_response.first['winning_candidate_id']
   end
 
   def test_can_get_an_individual_candidate
@@ -76,7 +76,7 @@ class AppTest < Minitest::Test
 
   def test_can_update_an_individual_candidate
     trump_with_campaigns
-    payload = {name: "jenny"}
+    payload = { name: 'jenny' }
     patch "/api/candidates/#{Candidate.last.id}", payload.to_json
     assert_equal 202, last_response.status
     assert_equal 'jenny', parsed_response['name']
@@ -104,7 +104,6 @@ class AppTest < Minitest::Test
     assert_equal 201, last_response.status
     assert_equal [gary, trump], Campaign.last.candidates
   end
-
 
   def test_can_create_a_campaign_with_invalid_number_of_candidates
     gary

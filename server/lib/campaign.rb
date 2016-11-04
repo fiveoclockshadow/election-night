@@ -7,7 +7,7 @@ class Campaign < ActiveRecord::Base
   validate :validate_number_of_candidates, on: :create
 
   def validate_number_of_candidates
-    errors.add(:candidates, "must have at least 2") if candidates.size < 2
+    errors.add(:candidates, 'must have at least 2') if candidates.size < 2
   end
 
   def fight!

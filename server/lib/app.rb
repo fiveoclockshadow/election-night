@@ -9,6 +9,7 @@ require_relative 'database'
 require_relative 'candidate'
 require_relative 'enrollment'
 require_relative 'campaign'
+require_relative 'app_helpers'
 
 class App < Sinatra::Base
   # Serve any HTML/CSS/JS from the client folder
@@ -21,34 +22,9 @@ class App < Sinatra::Base
   # This ensures that we always return the content-type application/json
   before do
     content_type 'application/json'
-    begin
-      @body_params = JSON.parse(request.body.read)
-    rescue
-      @body_params = {}
-    end
   end
 
-  helpers do
-    def json_payload
-      @body_params
-    end
-
-    def render_collection(collecton, args = {})
-      code = args[:status] || 200
-      args[:json_opts] ||= {}
-      [code, collecton.to_json]
-    end
-
-    def render_one(obj, args = {})
-      code = args[:status] || 200
-      args[:json_opts] ||= {}
-      if obj.valid?
-        [code, obj.as_json(args[:json_opts]).to_json]
-      else
-        [422, { errors: obj.errors.to_h }.to_json]
-      end
-    end
-  end
+  helpers AppHelpers
 
   # DO NOT REMOVE THIS ENDPOINT IT ENABLES HOSTING HTML FOR THE FRONT END
   get '/' do
