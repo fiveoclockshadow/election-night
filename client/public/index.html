@@ -4,7 +4,9 @@
         <meta charset='utf-8'>
         <title>[APP NAME HERE]</title>
 
-        <link href='css/main.css' rel='stylesheet' type='text/css'>
+        <!-- <link href='css/main.css' rel='stylesheet' type='text/css'> -->
+        <link rel="stylesheet" href="css/normalize.css" type="text/css">
+
     </head>
     <body>
 
@@ -31,28 +33,88 @@
 
             <!-- what other sections do we need? -->
 
-            <section class='create-a-???'>
-                <h2>Create a New [WHAT?]</h2>
+            <section class='create-a-candidate'>
+                <h2>Create a New Candidate</h2>
                 <form>
                     <aside>
-                        <label for='new-name'>Candidate A</label>
-                        <input type='text' id='name' name='name' required>
-                    </aside>
-                    <aside>
-                        <label for='new-name'>Candidate B</label>
-                        <input type='text' id='name' name='name' required>
+
+                        <label for='new-name'>Candidate Name</label>
+                        <input type='text' id='new-name' name='candidate-name' placeholder="Candidate Name">
+
+                        <label for='new-avatar'>Avatar</label>
+                        <input type='text' id='new-avatar' name='avatar' placeholder="Avatar URL">
+
+
+                        <label for="intel">Intelligence</label>
+
+                        <select name="intelSelect" id="intel">
+                          <option value="value1">1</option>
+                          <option value="value2">2</option>
+                          <option value="value3">3</option>
+                          <option value="value4">4</option>
+                          <option value="value5">5</option>
+                          <option value="value6">6</option>
+                          <option value="value7">7</option>
+                          <option value="value8">8</option>
+                          <option value="value9">9</option>
+                          <option value="value10">10</option>
+                        </select>
+
+
+
+
+                        <label for="charis">Charisma</label>
+
+                        <select name="charisSelect" id="charis">
+                          <option value="value1">1</option>
+                          <option value="value2">2</option>
+                          <option value="value3">3</option>
+                          <option value="value4">4</option>
+                          <option value="value5">5</option>
+                          <option value="value6">6</option>
+                          <option value="value7">7</option>
+                          <option value="value8">8</option>
+                          <option value="value9">9</option>
+                          <option value="value10">10</option>
+                        </select>
+
+                        <label for="power">Will Power</label>
+
+                        <select name="powerSelect" id="power">
+                          <option value="value1">1</option>
+                          <option value="value2">2</option>
+                          <option value="value3">3</option>
+                          <option value="value4">4</option>
+                          <option value="value5">5</option>
+                          <option value="value6">6</option>
+                          <option value="value7">7</option>
+                          <option value="value8">8</option>
+                          <option value="value9">9</option>
+                          <option value="value10">10</option>
+                        </select>
+
+
+
                     </aside>
 
                     <!-- What else do we need? -->
 
                     <aside>
-                        <input type='submit' value='Run Campaign'>
+
+
+
+                        <input type='submit' value='Create Candidate'>
+
                     </aside>
+
+
                 </form>
             </section>
 
         </main>
 
-
+        <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+        <script src="js/data.js"></script>
+        <script src="js/ui.js"></script>
     </body>
 </html>
