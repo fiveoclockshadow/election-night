@@ -11,16 +11,53 @@ $(".formCrtCand").on("submit", function CreateCand(event){
 
   var candidate = {
     name: $("#new-name").val(),
-    img_url: $("#new-avatar").val(),
+    image_url: $("#new-avatar").val(),
     intelligence: $("#intel").val(),
     charisma: $("#charis").val(),
     willpower: $("#power").val(),
   };
 
- console.log(candidate);
+
+    $.ajax({
+      url:"/api/candidates",
+      method: "POST",
+      data: JSON.stringify(candidate),
+      headers:{
+        "Content-Type": "application/json"
+      },
+    })
+
+    .done(function handleSuccess(data){
+      console.log("It worked", data);
+
+    })
+
+    .fail(function handleFailure(xhr){
+      console.log("Unable to communicate", xhr);
+    });
+
+
+
+
+
+
+
+
 
 });
 
+$(".formCrtCamp").on("submit", function CreateCand(event){
+  event.preventDefault();
+
+  var campaign = {
+    id: $("#new-name").val(),
+    start_at: $("#new-avatar").val(),
+    winning_candidate: $("#intel").val(),
+    candidate_one_id: $("#charis").val(),
+    candidate_two_id: $("#power").val(),
+  };
+    console.log(candidate);
+});
 
 
 
@@ -31,7 +68,7 @@ $(".formCrtCand").on("submit", function CreateCand(event){
 console.log("I am in data.js");
 
 
-// //Ajax call to get list of all candidate //////////////////////////////////////
+// // //Ajax call to get list of all candidate //////////////////////////////////////
 //
 // $("").on("click", function listAllCand(event){
 //   event.preventDefault();
@@ -39,7 +76,7 @@ console.log("I am in data.js");
 //   $.ajax({
 //     url:"/candidates",
 //     method: "GET",
-//     data: JSON.stringify({REPLACE-ME}),
+//     data: JSON.stringify({}),
 //     headers: {
 //       "Content-Type": "application/json"
 //     }
@@ -59,7 +96,7 @@ console.log("I am in data.js");
 //
 // });
 //
-//
+// //
 // // /Ajax call to get list of campaigns//////////////////////////////////////////
 //
 // $("").on("click", function listAllCamp(event){
@@ -117,31 +154,12 @@ console.log("I am in data.js");
 //
 // ///Ajax call to create a new candidate ////////////////////////////////////////
 //
-// $("").on("click", function listAllCamp(event){
-//   event.preventDefault();
-//
-//   $.ajax({
-//     url:"/candidates",
-//     method: "POST",
-//     data: JSON.stringify({}),
-//     dataType:
-//     headers:{
-//       "Content-Type": "application/json"
-//     },
-//   })
-//
-//   .done(function handleSuccess(data){
-//     console.log("It worked", data);
-//
-//   })
-//
-//   .fail(function handleFailure(xhr){
-//     console.log("Unable to communicate", xhr);
-//
-//
-//   })
-// });
-//
+$("").on("click", function listAllCamp(event){
+  event.preventDefault();
+
+
+});
+
 //
 // ///Ajax call to get a specific candidate with campaign history ///////////////
 //
