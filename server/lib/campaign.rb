@@ -12,6 +12,17 @@ class Campaign < ActiveRecord::Base
 
   def fight!
     self.start_at = Time.now
-    self.winning_candidate_id = candidates.to_a.sample.id
+    candidate = Candidate::CONSIDERING_ATTRIBUTES.map do |skill|
+      winnner_of_skill candidates, skill
+    end.each_with_object(Hash.new(0)) do |winner, acc|
+      acc[winner] += 1
+    end.max_by { |_winner, count| count }.first
+    self.winning_candidate = candidate
+  end
+
+  def winnner_of_skill(candidates, skill)
+    candidates.sort_by do |candidate|
+      candidate.skill_in_combat(skill)
+    end.last
   end
 end
