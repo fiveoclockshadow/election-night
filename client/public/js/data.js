@@ -6,6 +6,7 @@ window.election = window.election || {};
 
 
 
+
 $(".formCrtCand").on("submit", function CreateCand(event){
   event.preventDefault();
 
@@ -18,6 +19,8 @@ $(".formCrtCand").on("submit", function CreateCand(event){
   };
 
 
+// ///Ajax call to create a new candidate ////////////////////////////////////////
+
     $.ajax({
       url:"/api/candidates",
       method: "POST",
@@ -29,6 +32,7 @@ $(".formCrtCand").on("submit", function CreateCand(event){
 
     .done(function handleSuccess(data){
       console.log("It worked", data);
+      console.log(data.name);
 
     })
 
@@ -36,23 +40,16 @@ $(".formCrtCand").on("submit", function CreateCand(event){
       console.log("Unable to communicate", xhr);
     });
 
-
-
-
-
-
-
-
-
 });
+
+/////////////////////////////////////////////////////////////////////////////
+
 
 $(".formCrtCamp").on("submit", function CreateCand(event){
   event.preventDefault();
 
   var campaign = {
-    id: $("#new-name").val(),
-    start_at: $("#new-avatar").val(),
-    winning_candidate: $("#intel").val(),
+
     candidate_one_id: $("#charis").val(),
     candidate_two_id: $("#power").val(),
   };
@@ -68,33 +65,31 @@ $(".formCrtCamp").on("submit", function CreateCand(event){
 console.log("I am in data.js");
 
 
-// // //Ajax call to get list of all candidate //////////////////////////////////////
-//
-// $("").on("click", function listAllCand(event){
-//   event.preventDefault();
-//
-//   $.ajax({
-//     url:"/candidates",
-//     method: "GET",
-//     data: JSON.stringify({}),
-//     headers: {
-//       "Content-Type": "application/json"
-//     }
-//   })
-//
-//   .done(function handleSuccess(data){
-//     console.log("It worked", data);
-//
-//
-//   })
-//
-//   .fail(function handleFailure(xhr){
-//     console.log("Unable to communicate", xhr);
-//
-//
-//   })
-//
-// });
+// //Ajax call to get list of all candidate //////////////////////////////////////
+
+$(".listOfCand").on("click", function listAllCand(event){
+  event.preventDefault();
+
+  $.ajax({
+    url:"/api/candidates",
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+
+  .done(function handleSuccess(data){
+    console.log("It worked", data);
+    window.election.buildList(data);
+  })
+
+  .fail(function handleFailure(xhr){
+    console.log("Unable to communicate", xhr);
+
+
+  })
+
+});
 //
 // //
 // // /Ajax call to get list of campaigns//////////////////////////////////////////
@@ -152,7 +147,7 @@ console.log("I am in data.js");
 //
 //
 //
-// ///Ajax call to create a new candidate ////////////////////////////////////////
+
 //
 $("").on("click", function listAllCamp(event){
   event.preventDefault();
