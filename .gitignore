@@ -2,7 +2,7 @@
 *.sqlite3
 *.rbc
 /.config
-/coverage/
+coverage/
 /InstalledFiles
 /pkg/
 /spec/reports/

@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103161823) do
+ActiveRecord::Schema.define(version: 20161103222539) do
 
   create_table "campaigns", force: :cascade do |t|
     t.datetime "start_at"
+    t.integer  "winning_candidate_id"
+    t.index ["winning_candidate_id"], name: "index_campaigns_on_winning_candidate_id"
   end
 
   create_table "candidates", force: :cascade do |t|
