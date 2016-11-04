@@ -47,6 +47,12 @@ class App < Sinatra::Base
     )
   end
 
+  delete '/api/candidates/:id' do
+    candidate = Candidate.find(params['id'])
+    candidate.destroy
+    render_one(candidate)
+  end
+
   patch '/api/candidates/:id' do
     candidate = Candidate.find(params['id'])
     candidate.update(json_payload)
