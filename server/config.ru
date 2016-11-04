@@ -1,2 +1,2 @@
-require_relative "lib/app"
+require_relative 'lib/app'
 run App
