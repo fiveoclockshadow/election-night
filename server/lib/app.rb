@@ -22,14 +22,13 @@ class App < Sinatra::Base
   before do
     content_type 'application/json'
     begin
-    @body_params = JSON.parse(request.body.read)
+      @body_params = JSON.parse(request.body.read)
     rescue
       @body_params = {}
     end
   end
 
   helpers do
-
     def json_payload
       @body_params
     end
@@ -40,7 +39,7 @@ class App < Sinatra::Base
       [code, collecton.to_json]
     end
 
-    def render_json_or_errors(obj, args = {})
+    def render_one(obj, args = {})
       code = args[:status] || 200
       args[:json_opts] ||= {}
       if obj.valid?
@@ -66,36 +65,43 @@ class App < Sinatra::Base
   end
 
   get '/api/candidates/:id' do
-    render_json_or_errors(
+    render_one(
       Candidate.find(params['id']),
-      status: 200,
-      json_opts: { include: :campaigns }
+      json_opts: { include: :campaigns, methods: [:number_of_won_campaigns] }
     )
   end
 
   patch '/api/candidates/:id' do
-    cadidates = Candidate.find(params['id'].update(json_payload))
-    render_json_or_errors(cadidates, status: 201)
+    candidate = Candidate.find(params['id'])
+    candidate.update(json_payload)
+    render_one(candidate, status: 202)
   end
 
   post '/api/candidates' do
-    cadidates = Candidate.create(json_payload)
-    render_json_or_errors(cadidates, status: 201)
+    candidate = Candidate.create(json_payload)
+    render_one(candidate, status: 201)
   end
 
   ########## CAMPAIGNS
 
   get '/api/campaigns' do
-    Candidate.all
+    render_collection(
+      Campaign.all
+    )
   end
 
   get '/api/campaigns/:id' do
-    Campaign.find(params['id'])
+    render_one(
+      Campaign.find(params['id']),
+      json_opts: { include: [:winning_candidate, :candidates] }
+    )
   end
 
-  post '/api/campaigns/:id' do
-    campaign = Campaign.create(params['id'])
-    render_json_or_errors(campaign, status: 201)
+  post '/api/campaigns' do
+    campaign = Campaign.new(json_payload)
+    campaign.fight!
+    campaign.save
+    render_one(campaign, status: 201)
   end
 
   # If this file is run directly boot the webserver

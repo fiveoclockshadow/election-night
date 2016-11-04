@@ -3,6 +3,8 @@
 ENV['RACK_ENV'] = 'test'
 
 require 'bundler/setup'
+require 'simplecov'
+SimpleCov.start
 
 begin
   require 'pry'

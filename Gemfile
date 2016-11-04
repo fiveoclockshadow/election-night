@@ -13,3 +13,5 @@ group :test do
   gem 'minitest-focus'
   gem 'rack-test'
 end
+
+gem 'simplecov', :require => false, :group => :test
