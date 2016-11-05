@@ -15,5 +15,5 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'minitest/focus'
 require 'rack/test'
-
+require_relative 'support/fixtures'
 require_relative '../lib/app'

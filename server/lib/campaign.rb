@@ -12,6 +12,20 @@ class Campaign < ActiveRecord::Base
 
   def fight!
     self.start_at = Time.now
-    self.winning_candidate_id = candidates.to_a.sample.id
+    self.winning_candidate = winning_candidates_for_each_skill.mode
+  end
+
+  private
+
+  def winnner_of_skill(candidates, skill)
+    candidates.sort_by do |candidate|
+      candidate.skill_in_combat(skill)
+    end.first
+  end
+
+  def winning_candidates_for_each_skill
+    Candidate::CONSIDERING_ATTRIBUTES.map do |skill|
+      winnner_of_skill(candidates, skill)
+    end
   end
 end

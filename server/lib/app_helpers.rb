@@ -2,7 +2,8 @@ module AppHelpers
   def parse_json_payload
     @body_params = JSON.parse(request.body.read)
   rescue
-    @body_params = {}
+    request.body.rewind
+    raise "JSON could not be parsed: `#{request.body.read}`"
   end
 
   def json_payload
