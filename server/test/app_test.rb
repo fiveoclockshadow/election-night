@@ -24,4 +24,11 @@ class AppTest < Minitest::Test
     assert_match /HTTP VERB/, parsed_response['errors']['messages']
     assert_equal 404, last_response.status
   end
+
+  def test_can_handle_404_cleanly
+    trump
+    get "/api/candidates/#{Candidate.last.id + 1 }"
+    assert_match /Couldn't find Candidate/, parsed_response['errors']['messages']
+    assert_equal 404, last_response.status
+  end
 end
