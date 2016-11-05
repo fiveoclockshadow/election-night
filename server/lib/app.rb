@@ -15,6 +15,8 @@ require_relative 'array_monkey_patch'
 class App < Sinatra::Base
   # Serve any HTML/CSS/JS from the client folder
   set :static, true
+  set :show_exceptions, false
+  set :raise_errors, false
   set :public_folder, proc { File.join(root, '..', '..', 'client', 'public') }
 
   # Enable the session store
@@ -85,6 +87,21 @@ class App < Sinatra::Base
     campaign.fight!
     campaign.save
     render_one(campaign, status: 201)
+  end
+
+  error ActiveRecord::RecordNotFound do
+    status 404
+    {errors: { mesages: env['sinatra.error'].message}}.to_json
+  end
+
+  error ActiveModel::UnknownAttributeError do
+    status 422
+    {errors: { mesages: env['sinatra.error'].message}}.to_json
+  end
+
+  error do
+    status 500
+    {errors: { mesages: env['sinatra.error'].message}}.to_json
   end
 
   # If this file is run directly boot the webserver
