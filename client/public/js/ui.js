@@ -14,7 +14,7 @@
         .append(
           '<li>' +
            " ID:" + candidate.id +
-           " <img src=" + candidate.image_url + "height='40' width='30'>" +
+           " <img src='" + candidate.image_url + "' height='40' width='30'>" +
            " Name:" + candidate.name +
            " Charisma: "+ candidate.charisma +
            " Willpower: " + candidate.willpower +

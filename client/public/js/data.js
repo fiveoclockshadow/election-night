@@ -109,17 +109,23 @@ $(".create-a-campaign form").on("submit", function Create(event){
 
     console.log("I am in create candidate");
 
+    var candidate1 = $("#candidate-id-1").val();
+    console.log(candidate1);
+    var candidate2 = $("#candidate-id-2").val();
+    console.log(candidate2);
+
+
     var campaign = {
-      candidate_ids: [4,5]
+      candidate_ids: [candidate1, candidate2]
     };
 
-    console.log(candidate);
+    console.log(campaign);
 
 
     $.ajax({
       url:"/api/campaigns",
       method: "POST",
-      data: JSAON.stringify(campaign),
+      data: JSON.stringify(campaign),
       headers: {
         "Content-Type": "application/json"
       },
