@@ -6,6 +6,7 @@ class Candidate < ActiveRecord::Base
   CONSIDERING_ATTRIBUTES = %w(charisma intelligence willpower).freeze
 
   validate :validate_max_skill_points
+  validates :name, presence: true
 
   def validate_max_skill_points
     errors.add(:skill_points, "must be below #{max_skill_points}") if skill_points > max_skill_points

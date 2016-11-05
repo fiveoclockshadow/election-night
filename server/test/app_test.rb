@@ -96,11 +96,23 @@ class AppTest < Minitest::Test
     assert_equal 'bob', Candidate.last.name
   end
 
+  def test_can_handle_junk
+    post '/api/candidates', 'asdf'
+    assert_match /JSON/, parsed_response['errors']['messages']
+    assert_equal 500, last_response.status
+  end
+
+  def test_can_handle_junk_endpoints
+    post '/api/asdf', 'asdf'
+    assert_match /HTTP VERB/, parsed_response['errors']['messages']
+    assert_equal 404, last_response.status
+  end
+
   def test_cannot_create_a_candidate_with_too_many_skill_points
     payload = { name: 'bob', charisma: 123 }
     post '/api/candidates', payload.to_json
     assert_equal 422, last_response.status
-    assert_equal "must be below 10", parsed_response["errors"]["skill_points"]
+    assert_equal 'must be below 10', parsed_response['errors']['skill_points']
   end
 
   def test_cannot_create_a_candidate_with_unexpected_attributes_issues_errors

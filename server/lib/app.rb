@@ -94,17 +94,22 @@ class App < Sinatra::Base
 
   error ActiveRecord::RecordNotFound do
     status 404
-    { errors: { mesages: env['sinatra.error'].message } }.to_json
+    { errors: { messages: env['sinatra.error'].message } }.to_json
   end
 
   error ActiveModel::UnknownAttributeError do
     status 422
-    { errors: { mesages: env['sinatra.error'].message } }.to_json
+    { errors: { messages: env['sinatra.error'].message } }.to_json
   end
 
   error do
     status 500
-    { errors: { mesages: env['sinatra.error'].message } }.to_json
+    { errors: { messages: env['sinatra.error'].message } }.to_json
+  end
+
+  not_found do
+    status 404
+    { errors: { messages: 'HTTP VERB + Path not found 404' } }.to_json
   end
 
   # If this file is run directly boot the webserver
