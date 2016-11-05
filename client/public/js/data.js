@@ -44,7 +44,7 @@ $(".formCrtCand").on("submit", function CreateCand(event){
 
 
 
-// //Ajax call to get list of all candidates //////////////////////////////////////
+////Ajax call to get list of all candidates //////////////////////////////////
 
 $(".listOfCand").on("click", function listAllCand(event){
   event.preventDefault();
@@ -68,7 +68,7 @@ $(".listOfCand").on("click", function listAllCand(event){
 
 });
 
-// ///Ajax call to delete a candidate////////////////////////////////////////////
+/////Ajax call to delete a candidate//////////////////////////////////////////
 
 $(".list-of-candidates").on("click", ".delete-candidate", function listAllCamp(event){
   event.preventDefault();
@@ -101,7 +101,7 @@ $(".list-of-candidates").on("click", ".delete-candidate", function listAllCamp(e
 });
 
 
-// ///Ajax call to create a new campaign ////////////////////////////////////////
+/////Ajax call to create a new campaign /////////////////////////////////////
 
 
 $(".create-a-campaign form").on("submit", function Create(event){
@@ -144,86 +144,32 @@ $(".create-a-campaign form").on("submit", function Create(event){
 
 
 
+/////Ajax call to get list of campaigns///////////////////////////////////
+
+$(".seeOldCamp").on("click", function listAllCamp(event){
+  event.preventDefault();
+
+  $.ajax({
+    url:"/api/campaigns",
+    method: "GET",
+    headers:{
+      "Content-Type": "application/json"
+    },
+  })
+
+  .done(function handleSuccess(data){
+    console.log("It worked", data);
+    window.election.displayOldCampaigns(data);
+
+  })
+
+  .fail(function handleFailure(xhr){
+    console.log("Unable to communicate", xhr);
 
 
+  });
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-// //
-// // /Ajax call to get list of campaigns//////////////////////////////////////////
-//
-// $("").on("click", function listAllCamp(event){
-//   event.preventDefault();
-//
-//   $.ajax({
-//     url:"/campaigns",
-//     method: "GET",
-//     data: JSON.stringify({}),
-//     headers:{
-//       "Content-Type": "application/json"
-//     },
-//   })
-//
-//   .done(function handleSuccess(data){
-//     console.log("It worked", data);
-//
-//   })
-//
-//   .fail(function handleFailure(xhr){
-//     console.log("Unable to communicate", xhr);
-//
-//
-//   })
-// });
-//
-//
-
-
-
-// $("").on("click", function listAllCamp(event){
-//   event.preventDefault();
-//
-//   $.ajax({
-//     url:"/campaigns",
-//     method: "POST",
-//     data: JSON.stringify({}),
-//     headers:{
-//       "Content-Type": "application/json"
-//     },
-//   })
-//
-//   .done(function handleSuccess(data){
-//     console.log("It worked", data);
-//
-//   })
-//
-//   .fail(function handleFailure(xhr){
-//     console.log("Unable to communicate", xhr);
-//
-//
-//   })
-// });
-//
-//
-//
-
-//
 
 
 //
