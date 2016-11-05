@@ -10,6 +10,7 @@ require_relative 'candidate'
 require_relative 'enrollment'
 require_relative 'campaign'
 require_relative 'app_helpers'
+require_relative 'array_monkey_patch'
 
 class App < Sinatra::Base
   # Serve any HTML/CSS/JS from the client folder
