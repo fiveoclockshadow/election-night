@@ -19,6 +19,8 @@ $(".formCrtCand").on("submit", function CreateCand(event){
     willpower: $("#power").val(),
   };
 
+
+
 ///Ajax call to create a new candidate ////////////////////////////////////////
 
     $.ajax({
@@ -38,9 +40,10 @@ $(".formCrtCand").on("submit", function CreateCand(event){
       console.log("Unable to communicate", xhr);
     });
 
+    console.log(candidate.image_url);
+
 });
 
-/////////////////////////////////////////////////////////////////////////////
 
 
 // //Ajax call to get list of all candidate //////////////////////////////////////
@@ -66,6 +69,77 @@ $(".listOfCand").on("click", function listAllCand(event){
   });
 
 });
+
+// ///Ajax call to delete a candidate////////////////////////////////////////////
+
+$(".list-of-candidates").on("click", ".delete-candidate", function listAllCamp(event){
+  event.preventDefault();
+
+
+  console.log(this);
+ var candidate_id = $(event.target).attr("data-candidate-id");
+ console.log($(event.target).attr("data-candidate-id"));
+ console.log(candidate_id);
+
+
+  $.ajax({
+    url:"/api/candidates/" + candidate_id,
+    method: "DELETE",
+    headers:{
+      "Content-Type": "application/json"
+    },
+  })
+
+  .done(function handleSuccess(data){
+    console.log("It worked", data);
+
+  })
+
+  .fail(function handleFailure(xhr){
+    console.log("Unable to communicate", xhr);
+
+
+  });
+});
+
+
+// ///Ajax call to create a new campaign ////////////////////////////////////////
+
+
+$(".formCrtCamp").on("submit", function Create(event){
+  event.preventDefault();
+
+  var campaign = {
+
+    candidate_one_id: $("#charis").val(),
+    candidate_two_id: $("#power").val(),
+  };
+    console.log(candidate);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
 // //
 // // /Ajax call to get list of campaigns//////////////////////////////////////////
@@ -95,19 +169,7 @@ $(".listOfCand").on("click", function listAllCand(event){
 // });
 //
 //
-// ///Ajax call to create a new campaign ////////////////////////////////////////
-//
 
-$(".formCrtCamp").on("submit", function Create(event){
-  event.preventDefault();
-
-  var campaign = {
-
-    candidate_one_id: $("#charis").val(),
-    candidate_two_id: $("#power").val(),
-  };
-    console.log(candidate);
-});
 
 
 // $("").on("click", function listAllCamp(event){
@@ -201,37 +263,7 @@ $(".formCrtCamp").on("submit", function Create(event){
 //
 //
 //
-// ///Ajax call to delete a candidate////////////////////////////////////////////
-//
-$(".list-of-candidates").on("click", ".delete-candidate", function listAllCamp(event){
-  event.preventDefault();
 
-
-  console.log(this);
- var candidate_id = $(event.target).attr("data-candidate-id");
- console.log($(event.target).attr("data-candidate-id"));
- console.log(candidate_id);
-
-
-  $.ajax({
-    url:"/api/candidates/" + candidate_id,
-    method: "DELETE",
-    headers:{
-      "Content-Type": "application/json"
-    },
-  })
-
-  .done(function handleSuccess(data){
-    console.log("It worked", data);
-
-  })
-
-  .fail(function handleFailure(xhr){
-    console.log("Unable to communicate", xhr);
-
-
-  });
-});
 //
 //
 //
