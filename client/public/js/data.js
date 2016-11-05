@@ -44,7 +44,7 @@ $(".formCrtCand").on("submit", function CreateCand(event){
 
 
 
-// //Ajax call to get list of all candidate //////////////////////////////////////
+// //Ajax call to get list of all candidates //////////////////////////////////////
 
 $(".listOfCand").on("click", function listAllCand(event){
   event.preventDefault();
@@ -130,9 +130,9 @@ $(".create-a-campaign form").on("submit", function Create(event){
         "Content-Type": "application/json"
       },
     })
-
     .done(function handleSuccess(data){
-      console.log("It worked", data);
+        console.log("It worked", data);
+        window.election.displayElectionResults(data);
     })
 
     .fail(function handleFailure(xhr){

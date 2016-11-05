@@ -25,6 +25,13 @@
     });
   };
 
+  window.election.displayElectionResults = function displayElectionResults (campaign_data) {
+    console.log(campaign_data.winning_candidate.name);
+
+    $(".create-a-campaign").append("<p>" + campaign_data.winning_candidate.name + " won!</p>")
+  };
+
+
 
 
 
