@@ -15,6 +15,8 @@ class Campaign < ActiveRecord::Base
     self.winning_candidate = winning_candidates_for_each_skill.mode
   end
 
+  private
+
   def winnner_of_skill(candidates, skill)
     candidates.sort_by do |candidate|
       candidate.skill_in_combat(skill)
