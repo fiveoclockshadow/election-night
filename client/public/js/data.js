@@ -19,8 +19,6 @@ $(".formCrtCand").on("submit", function CreateCand(event){
     willpower: $("#power").val(),
   };
 
-
-
 ///Ajax call to create a new candidate ////////////////////////////////////////
 
     $.ajax({
@@ -106,17 +104,37 @@ $(".list-of-candidates").on("click", ".delete-candidate", function listAllCamp(e
 // ///Ajax call to create a new campaign ////////////////////////////////////////
 
 
-$(".formCrtCamp").on("submit", function Create(event){
-  event.preventDefault();
+$(".create-a-campaign form").on("submit", function Create(event){
+    event.preventDefault();
 
-  var campaign = {
+    console.log("I am in create candidate");
 
-    candidate_one_id: $("#charis").val(),
-    candidate_two_id: $("#power").val(),
-  };
+    var campaign = {
+      candidate_ids: [4,5]
+    };
+
     console.log(candidate);
-});
 
+
+    $.ajax({
+      url:"/api/campaigns",
+      method: "POST",
+      data: JSAON.stringify(campaign),
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+
+    .done(function handleSuccess(data){
+      console.log("It worked", data);
+    })
+
+    .fail(function handleFailure(xhr){
+      console.log("Unable to communicate", xhr);
+    });
+
+
+});
 
 
 

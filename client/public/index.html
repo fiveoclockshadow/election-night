@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset='utf-8'>
-        <title>[APP NAME HERE]</title>
+        <title>Election Night</title>
 
         <!-- <link href='css/main.css' rel='stylesheet' type='text/css'> -->
         <link rel="stylesheet" href="css/normalize.css" type="text/css">
@@ -11,7 +11,7 @@
     <body>
 
         <header>
-            <h1>[APP NAME HERE]</h1>
+            <h1>Election Night</h1>
         </header>
 
         <nav>
@@ -32,11 +32,34 @@
                 </ul>
             </section>
 
-            <!-- what other sections do we need? -->
+
+<!-- Create a new Campaign -->
+            <section class="create-a-campaign">
+
+              <h2>Create a New Campaign</h2>
+
+               <form>
+                 <label for="candidate-id-1"></label>
+                 <input type="text" id="candidate-id-1" placeholder="1st Candidate ID">
+
+                 <label for="candidate-id-2"></label>
+                 <input type="text" id="candidate-id-2" placeholder="2nd Candidate ID">
+
+                 <input type="submit" value="Create Campaign">
+
+               </form>
+            </section>
+
+
+
+            <!-- Create a new Candidate -->
 
             <section class='create-a-candidate'>
+
                 <h2>Create a New Candidate</h2>
+
                 <form class="formCrtCand">
+
                     <aside>
                         <label for='new-name'>Candidate Name</label>
                         <input type='text' id='new-name' name='candidate-name' placeholder="Candidate Name">
@@ -46,7 +69,6 @@
 
 
                         <label for="intel">Intelligence</label>
-
                         <select name="intelSelect" id="intel" class="canIntel">
                           <option>1</option>
                           <option>2</option>
@@ -60,8 +82,8 @@
                           <option>10</option>
                         </select>
 
-                        <label for="charis">Charisma</label>
 
+                        <label for="charis">Charisma</label>
                         <select name="charisSelect" id="charis" class="canChar">
                           <option>1</option>
                           <option>2</option>
@@ -75,8 +97,8 @@
                           <option>10</option>
                         </select>
 
-                        <label for="power">Will Power</label>
 
+                        <label for="power">Will Power</label>
                         <select name="powerSelect" id="power" class="canPower">
                           <option>1</option>
                           <option>2</option>
@@ -93,12 +115,9 @@
 
                     </aside>
 
-                    <!-- What else do we need? -->
-
                     <aside>
                         <input type='submit' value='Create Candidate' class="crtCand">
                     </aside>
-
 
                 </form>
             </section>
