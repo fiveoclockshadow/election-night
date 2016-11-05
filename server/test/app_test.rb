@@ -13,22 +13,22 @@ class AppTest < Minitest::Test
   end
 
   def gary
-    @_gary ||= Candidate.create(
+    @_gary ||= Candidate.create!(
       name: 'Gary',
       image_url: 'http://img.wonkette.com/wp-content/uploads/2016/08/nbc-fires-donald-trump-after-he-calls-mexicans-rapists-and-drug-runners.jpg',
-      intelligence: 0,
+      intelligence: 1,
       charisma: 5,
-      willpower: 9
+      willpower: 3
     )
   end
 
   def trump
-    @_trump ||= Candidate.create(
+    @_trump ||= Candidate.create!(
       name: 'Trump',
       image_url: 'http://img.wonkette.com/wp-content/uploads/2016/08/nbc-fires-donald-trump-after-he-calls-mexicans-rapists-and-drug-runners.jpg',
-      intelligence: 0,
+      intelligence: 3,
       charisma: 5,
-      willpower: 9
+      willpower: 2
     )
   end
 
@@ -94,6 +94,19 @@ class AppTest < Minitest::Test
     post '/api/candidates', payload.to_json
     assert_equal 201, last_response.status
     assert_equal 'bob', Candidate.last.name
+  end
+
+  def test_cannot_create_a_candidate_with_too_many_skill_points
+    payload = { name: 'bob', charisma: 123 }
+    post '/api/candidates', payload.to_json
+    assert_equal 422, last_response.status
+    assert_equal "must be below 10", parsed_response["errors"]["skill_points"]
+  end
+
+  def test_cannot_create_a_candidate_with_unexpected_attributes_issues_errors
+    payload = { name: 'bob', asdf: 'test' }
+    post '/api/candidates', payload.to_json
+    assert_equal 422, last_response.status
   end
 
   def test_can_create_a_campaign

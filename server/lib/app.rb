@@ -46,7 +46,10 @@ class App < Sinatra::Base
   get '/api/candidates/:id' do
     render_one(
       Candidate.find(params['id']),
-      json_opts: { include: :campaigns, methods: [:number_of_won_campaigns] }
+      json_opts: {
+        include: :campaigns,
+        methods: [:number_of_won_campaigns, :max_skill_points]
+      }
     )
   end
 
