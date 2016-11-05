@@ -9,7 +9,7 @@ class Candidate < ActiveRecord::Base
   validates :name, presence: true
 
   def validate_max_skill_points
-    errors.add(:skill_points, "must be below #{max_skill_points}") if skill_points > max_skill_points
+    errors.add(:skill_points, "must culmulatively be below #{max_skill_points}") if skill_points > max_skill_points
   end
 
   def skill_points
