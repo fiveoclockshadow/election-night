@@ -89,7 +89,7 @@ class App < Sinatra::Base
     campaign = Campaign.new(json_payload)
     campaign.fight!
     campaign.save
-    render_one(campaign, status: 201)
+    render_one(campaign, status: 201, json_opts: { include: :winning_candidate })
   end
 
   error ActiveRecord::RecordNotFound do
