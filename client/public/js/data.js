@@ -83,6 +83,7 @@ $(".list-of-candidates").on("click", ".delete-candidate", function listAllCamp(e
   $.ajax({
     url:"/api/candidates/" + candidate_id,
     method: "DELETE",
+    data: JSON.stringify(candidate_id),
     headers:{
       "Content-Type": "application/json"
     },
@@ -171,8 +172,45 @@ $(".seeOldCamp").on("click", function listAllCamp(event){
 });
 
 
+// ///Ajax call to update a specific candidate///////////////////////////////////
 
-//
+$(".list-of-candidates").on("click", ".update-candidate", function updateCandidate(event){
+  event.preventDefault();
+
+
+  console.log(this);
+  var candidate_id = $(event.target).attr("data-candidate-id");
+  console.log($(event.target).attr("data-candidate-id"));
+  console.log(candidate_id);
+
+ // This should be called by the submit listener of the edit form for the particular
+  $.ajax({
+    url:"/api/candidates/" + candidate_id,
+    method: "GET",
+    headers:{
+      "Content-Type": "application/json"
+    },
+  })
+
+  .done(function handleSuccess(data){
+    console.log("It worked", data);
+    $(".edit-a-candidate").append($(".formCrtCand").clone());
+    $(".edit-cand").val(data.name);
+    $(".canAva").val(data.image_url);
+    $(".canIntel").val(data.intelligence);
+    $(".canChar").val(data.charisma);
+    $(".canPower").val(data.willpower);
+
+  })
+
+  .fail(function handleFailure(xhr){
+    console.log("Unable to communicate", xhr);
+
+
+  });
+});
+
+
 // ///Ajax call to get a specific candidate with campaign history ///////////////
 //
 // $("").on("click", function listAllCamp(event){
@@ -201,44 +239,7 @@ $(".seeOldCamp").on("click", function listAllCamp(event){
 //   })
 // });
 //
-//
-//
-//
-// ///Ajax call to update a specific candidate///////////////////////////////////
-//
-// $("").on("click", function listAllCamp(event){
-//   event.preventDefault();
-//
-//   $.ajax({
-//     //Update a specific candidate object
-//     url:"/api/candidates/:candidate_id",
-//     method: "PATCH",
-//     data: JSON.stringify({}),
-//     headers:{
-//       "Content-Type": "application/json"
-//     },
-//   })
-//
-//   .done(function handleSuccess(data){
-//     console.log("It worked", data);
-//
-//   })
-//
-//   .fail(function handleFailure(xhr){
-//     console.log("Unable to communicate", xhr);
-//
-//
-//   });
-// });
-//
-//
-//
 
-//
-//
-//
-//
-// ////////////////////////////////////////////////////////////////////////////
 // // /Ajax call to return a collection of campaign objects for a candidate////////
 //
 //

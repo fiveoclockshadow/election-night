@@ -14,12 +14,13 @@
         .append(
           '<li>' +
            " ID:" + candidate.id +
-           " <img src='" + candidate.image_url + "' height='40' width='30'>" +
+           " <img src='" + candidate.image_url + "' height='50' width='50'>" +
            " Name:" + candidate.name +
            " Charisma: "+ candidate.charisma +
            " Willpower: " + candidate.willpower +
            " Intelligence: " + candidate.intelligence +
            " <a href='#' class='delete-candidate' data-candidate-id= '" + candidate.id + "'>Delete</a>"+
+           " <a href='#' class='update-candidate' data-candidate-id= '" + candidate.id + "'>Update</a>"+
           '</li>'
         );
     });
