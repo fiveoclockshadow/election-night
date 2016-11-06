@@ -5,9 +5,6 @@
   window.election = window.election || {};
 
 
-  // console.log("I am in ui.js");
-
-
 /////Showing list of all existing candidates//////////////////////////////////
 
   window.election.buildList = function buildList(candidate_data) {
@@ -40,9 +37,18 @@
 
 /////////////Show history of campaigns//////////////////////////////////////
 
-window.election.displayOldCampaigns = function displayOldCampaigns(old_campaigns){
-  console.log(old_campaigns.winning_candidate);
-  console.log(old_campaigns.start_date);
+window.election.displayOldCampaigns = function displayOldCampaigns(old_campaigns_data){
+  old_campaigns_data.forEach(function loopRecords(records){
+    $(".list-of-campaigns ul")
+      .append(
+        "<li>" +
+        " Campaign Id: " + records.id +
+        " Campaign Start Dt: " + records.start_at +
+        " Winner Id: " + records.winning_candidate_id +
+        "</li>"
+      );
+
+  });
 };
 
 
