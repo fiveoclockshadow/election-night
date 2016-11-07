@@ -21,3 +21,5 @@ coverage/
 /.bundle/
 /vendor/bundle
 /lib/bundler/man/
+
+.sass-cache

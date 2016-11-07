@@ -13,9 +13,9 @@
       $(".list-of-candidates ul")
         .append(
           '<li>' +
+           "  <img src='" + candidate.image_url + "' height='50' width='50'> " +
            " ID:" + candidate.id +
-           " <img src='" + candidate.image_url + "' height='50' width='50'>" +
-           " Name:" + candidate.name +
+           " Name: " + candidate.name +
            " Charisma: "+ candidate.charisma +
            " Willpower: " + candidate.willpower +
            " Intelligence: " + candidate.intelligence +
@@ -44,11 +44,10 @@ window.election.displayOldCampaigns = function displayOldCampaigns(old_campaigns
       .append(
         "<li>" +
         " Campaign Id: " + records.id +
-        " Campaign Start Dt: " + records.start_at +
-        " Winner Id: " + records.winning_candidate_id +
+        "   Campaign Start Dt: " + records.start_at +
+        "   Winner Id: " + records.winning_candidate_id +
         "</li>"
       );
-
   });
 };
 

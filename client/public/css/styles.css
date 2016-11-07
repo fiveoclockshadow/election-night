@@ -1,7 +1,8 @@
 nav {
   background-color: #ff0000; }
-  nav li {
+  nav ul li {
     list-style: none;
+    display: inline;
     font-size: 1.2em; }
 
 li a {
@@ -10,11 +11,13 @@ li a {
   color: #153ebf;
   display: inline; }
 
-body {
-  background-color: #febebe; }
-  body h1 {
-    color: #0e01fb; }
-  body h2 {
-    color: #0e01fb; }
+body h1 {
+  color: #0e01fb;
+  text-align: center; }
+body h2 {
+  color: #0e01fb; }
+
+main .list-of-candidates ul li {
+  list-style: none; }
 
 /*# sourceMappingURL=styles.css.map */
