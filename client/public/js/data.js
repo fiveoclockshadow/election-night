@@ -177,11 +177,9 @@ $(".seeOldCamp").on("click", function listAllCamp(event){
 $(".list-of-candidates").on("click", ".update-candidate", function updateCandidate(event){
   event.preventDefault();
 
-
-  console.log(this);
   var candidate_id = $(event.target).attr("data-candidate-id");
-  console.log($(event.target).attr("data-candidate-id"));
-  console.log(candidate_id);
+  // console.log($(event.target).attr("data-candidate-id"));
+  // console.log(candidate_id);
 
  // This should be called by the submit listener of the edit form for the particular
   $.ajax({
@@ -201,6 +199,32 @@ $(".list-of-candidates").on("click", ".update-candidate", function updateCandida
     $(".canChar").val(data.charisma);
     $(".canPower").val(data.willpower);
 
+
+///Here I am updating existing candidate record
+
+        $(".formCrtCand").on("submit", function CreateCand(event){
+          event.preventDefault();
+
+            $.ajax({
+              url:"/api/candidates",
+              method: "PATCH",
+              data: JSON.stringify(candidate),
+              headers:{
+                "Content-Type": "application/json"
+              },
+            })
+
+            .done(function handleSuccess(data){
+              console.log("It worked", data);
+            })
+
+            .fail(function handleFailure(xhr){
+              console.log("Unable to communicate", xhr);
+            });
+        });
+
+//////////////////////////////////////////////
+
   })
 
   .fail(function handleFailure(xhr){
@@ -209,6 +233,7 @@ $(".list-of-candidates").on("click", ".update-candidate", function updateCandida
 
   });
 });
+
 
 
 // ///Ajax call to get a specific candidate with campaign history ///////////////
